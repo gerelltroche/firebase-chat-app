@@ -32,7 +32,7 @@ function App() {
                 <SignOut />
             </header>
             <section>
-                {user ? <ChatRoom/> : <SignIn/>}
+                {!user ? <ChatRoom/> : <SignIn/>}
             </section>
         </div>
     );
