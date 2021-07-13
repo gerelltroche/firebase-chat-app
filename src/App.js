@@ -30,7 +30,6 @@ function App() {
             <header>
                 <h1>Messageboard</h1>
                 <SignOut />
-                <h4>Made by T. Gerell Troche</h4>
             </header>
             <section>
                 {user ? <ChatRoom/> : <SignIn/>}
@@ -52,7 +51,7 @@ const SignIn = () => {
 
 const SignOut = () => {
     return auth.currentUser && (
-        <button onClick={() => auth.signOut()}>Sign Out</button>
+        <button id='signout' onClick={() => auth.signOut()}>Sign Out</button>
     )
 }
 
@@ -69,20 +68,21 @@ const ChatRoom = () => {
         e.preventDefault()
 
         const { uid, photoURL } = auth.currentUser
-
+        const tempval = formValue
+        setFormValue('')
         await messagesRef.add({
-            text: formValue,
+            text: tempval,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid,
             photoURL
         })
 
-        setFormValue('')
+
 
     }
 
     return (
-        <>
+        <div id='messageContainer'>
             <div>
                 {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
                 {!messages && 'No Messages'}
@@ -92,7 +92,7 @@ const ChatRoom = () => {
                 <input value={formValue} onChange={(e)=> setFormValue(e.target.value)} type="text"/>
                 <button type={'Submit'}>Send</button>
             </form>
-        </>
+        </div>
     )
 }
 
