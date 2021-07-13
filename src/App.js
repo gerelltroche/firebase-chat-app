@@ -32,7 +32,7 @@ function App() {
                 <SignOut />
             </header>
             <section>
-                {!user ? <ChatRoom/> : <SignIn/>}
+                {user ? <ChatRoom/> : <SignIn/>}
             </section>
         </div>
     );
@@ -99,7 +99,7 @@ const ChatRoom = () => {
 const ChatMessage = (props) => {
     const { text, uid, photoURL } = props.message
 
-    const messageClass = 'sent'
+    const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
     return (
         <div className={`message ${messageClass}`}>
