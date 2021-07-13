@@ -99,7 +99,7 @@ const ChatRoom = () => {
 const ChatMessage = (props) => {
     const { text, uid, photoURL } = props.message
 
-    const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+    const messageClass = 'sent'
 
     return (
         <div className={`message ${messageClass}`}>
